@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Frontend\Checkout;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Orderitem;
 use App\Models\Order;
 

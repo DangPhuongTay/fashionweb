@@ -1,130 +1,73 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ecommerce Navbar Design</title>
 
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<div class="main-navbar shadow-sm sticky-top">
-        <div class="top-navbar">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                        <h5 class="brand-name">{{$appSetting->website_name ?? 'website name'}}</h5>
-                    </div>
-                    <div class="col-md-5 my-auto">
-                        <form role="search" action="{{url('search')}}" method="GET" >
-                            <div class="input-group">
-                                <input type="search" name="search" value="{{Request::get('search')}}" placeholder="Search your product" class="form-control" />
-                                <button class="btn bg-white" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-5 my-auto">
-                        <ul class="nav justify-content-end">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/cart') }}">
-                                    <i class="fa fa-shopping-cart"></i> Cart (<livewire:frontend.cart.cart-count/>)
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/wishlist') }}">
-                                    <i class="fa fa-heart"></i> Wishlist (<livewire:frontend.wishlist-count />)
-                                </a>
-                            </li>
-                            @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+    <header>
+      <div class="header-logo">
+       <a href="{{ url('/') }}"><img src="{{ asset('assets/imgs/logo.png')}}" alt="logo"></a>
+      </div>
+      <div class="header-navbar">
+        <ul class="header-list-link-page">
+
+          <li class="header-link-page"><a href="/">HOME</a></li>
+          <li class="header-link-page"><a href="{{ url('/collections') }}">All CATEGORY</a></li>
+          <li class="header-link-page"><a href="{{ url('/new-arrivals') }}">NEW ARRIVALS</a></li>
+          <li class="header-link-page"><a href="{{ url('/featured-products') }}">FUTURE PRODUCT</a></li>
+          <li class="header-link-page"><a href="{{ url('/wishlist') }}">WISHLIST</a></li>
+          <li class="header-link-page"><a href="{{ url('/cart') }}">CART</a></li>
+          <li class="header-link-page"><a href="#">CONTACT</a></li>
+          @if (Route::has('login'))
+                                <li class="header-link-page">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('LOGIN') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li class="header-link-page">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTER') }}</a>
                                 </li>
-                            @endif
-                        @else
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-user"></i>  {{ Auth::user()->name }}
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
-                                
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                         <i class="fa fa-sign-out"></i> {{ __('Logout') }}
+            @endif
+          <li class="header-link-page" >
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+               <i class="fa fa-sign-out"></i> {{ __('LOGOUT') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </li>
-                                </ul>
-                            </li>
-                                                   
-                        @endguest
-                        </ul>
-                    </div>
-                </div>
-            </div>
+         
+        </ul>
+      </div>
+      <div class="header-list-control">
+        <div class="header-control">
+            <form action="{{ url('search')}}" method="GET" role="search">
+            <input name="search" value="{{ Request::get('search')}}" class="search" type="search" placeholder="Enter ...">
+            <button type="submit">
+               <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </form>
         </div>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-                <a class="navbar-brand d-block d-sm-block d-md-none d-lg-none" href="#">
-                    Funda Ecom
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/collections') }}">All Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/new-arrivals') }}">New Arrivals</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Featured Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Wishlist</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Fashions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Accessories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Appliances</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <div class="header-control">
+          <a href="{{ url('/cart') }}"><ion-icon name="bag-outline"></ion-icon></a>
+        </div>
+        <div class="header-control">
+          <a href="{{ url('/wishlist') }}"><ion-icon name="heart-outline"></ion-icon></a>
+        </div>
+
+
+        <button id="burger-main">
+          <div class="body-blur"></div>
+          <div class="burger-box">
+            <div class="burger"></div>
+          </div>
+        </button>
+      </div>
+
+      
+      <a class="subscribe" href="{{ url('/profile') }}">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          PROFILE
+      </a>
+
+    </header>
+  

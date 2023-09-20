@@ -1,0 +1,119 @@
+
+.category{
+    width: 100%;
+    padding: 90px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    background-color: #fff;
+}
+.category-content-link{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding-bottom: 20px;
+}
+.category-header-box{
+    overflow: hidden;
+    margin: 50px 0 50px 0;
+ 
+}
+.category-content-link a{
+    text-align: center;
+}
+.category-content-link-main,
+.category-header{
+    position: relative;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 550;
+    line-height: 2rem;
+    color: #000;
+    overflow: hidden;
+}
+.category-content-link-main:hover::after,
+.category-header:hover::after{
+    left: 150%;
+}
+.category-content-link-main:hover::before,
+.category-header:hover::before{
+    left: 0;
+}
+.category-content-link-main::before,
+.category-header::before{
+    background: #000;
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: -150%;
+    position: absolute;
+    width: 100%;
+    transition: all 1s;
+}
+.category-content-link-main::after,
+.category-header::after{
+    background: #000;
+    bottom: 0;
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    transition: all 1s;
+}
+.category-list{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+#link-category{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.category-item:hover{
+    background: #f9f9f9;
+}
+.category-item{
+    width: calc(50% - 2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 600px;
+    background-color:#eee;
+    transition: all .2s;
+}
+.category-image{
+    width: 60%;
+}
+.category-image img{
+    width: 100%;
+}
+.category-content{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.category-content-name{
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.category-content-link-main{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: .5rem;
+}

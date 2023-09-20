@@ -1,4 +1,4 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('title','Home')
 
@@ -9,14 +9,14 @@
     @foreach($sliders as $key => $sliderItem)
         <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
             @if($sliderItem->image)
-                <img src="{{ asset("$sliderItem->image") }}" class="d-block" style="width:100vw; height:80vh;object-fit: cover;" alt="Slider">
+                <img id="item_image" src="{{ asset("$sliderItem->image") }}" class="d-block" style="width:100vw; height:80vh;object-fit: cover;" alt="Slider">
             @endif
-            <div class="carousel-caption d-none d-md-block">
+            <!-- <div class="carousel-caption d-none d-md-block">
                     <div class="custom-carousel-content">
-                        <h1>
+                        <h1 id="title_slider">
                             {{$sliderItem->title}}
                         </h1>
-                        <p>
+                        <p id="title_description">
                             {{$sliderItem->description}}
                         </p>
                         <div>
@@ -25,7 +25,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
         </div>
     @endforeach
   </div>
@@ -36,187 +36,83 @@
   </button>
   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
+    <span class="visually-hidden text-dark">Next</span>
   </button>
 </div>
-<div class="py-5 bg-white">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 text-center">
-        <h4>Wellcome</h4>
-        <div class="underline">
+
+      <section class="product-featured">
+       <div class="product-featured-header-box">
+        <a href="{{ url('featured-products') }}"><span class="product-featured-header">FEATURED</span></a>
+       </div>
+
+        <div class="product-featured-header-slider">
+          @if($newArrivalsProduct)
+          @foreach($newArrivalsProduct as $productItem)
+          <div class="product-featured-header-slider-item">
+            <div class="featured-header-slider-item-image">
+              <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
+                @if($productItem->productImages->count()>0)
+                  <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}">
+                @endif
+              </a>
+            </div>
+            <div class="featured-header-slider-item-name"><p>{{ $productItem->name}}</p></div>
+          </div>
+          @endforeach
+          @endif
         </div>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nihil voluptas illum dolore, sunt eveniet architecto dignissimos. Esse provident ipsa illum excepturi quasi repellat eum neque, dolores autem. Quod, saepe perferendis?
-          </p>
-       
-      </div>
-    </div>
-  </div>
-</div>
-<div class="py-5 bg-white">
-  <div class="container">
-    <div class="row ">
-      <div class="col-md-12">
-        <h4>Trending Products<a href="{{ url('featured-products') }}" class="btn btn-warning float-end">View More</a></h4>
-        <div class="underline"></div>
-      </div>
-      @if($trendingProducts)
-      <div class="col-md-12">
-      <div class="owl-carousel owl-theme four-carousel">
-               @foreach($trendingProducts as $productItem)
-
-              <div class="item">
-              <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-danger">New</label>
-
-                            @if($productItem->productImages->count()>0)
-                            <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}"> -->
-
-                              </a>
-                            
-                            @endif
-                           
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">  {{ $productItem->brand}}</p>
-                            <h5 class="product-name">
-                               <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                {{ $productItem->name}}
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">{{ $productItem->selling_price}} VND</span>
-                                <span class="original-price">{{ $productItem->original_price}} VND</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    @endforeach
-                    </div>
-                </div>
-              @else
-                <div class="col-md-12">
-                    <div class="p-2">
-                    <h4>No Product Avaliable for</h4>
-                    </div>
-                </div>
+      </section>
+      <section class="product-new">
+        <div class="product-new-list">
+          @if($newArrivalsProduct)
+          @foreach($newArrivalsProduct as $productItem)
+          <div class="product-new-item">
+            <div class="product-new-item-img">
+              @if($productItem->productImages->count()>0)
+                <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}">
               @endif
-      </div>
-    </div>
-  </div>
-</div>
-<div class="py-5 bg-white">
-  <div class="container">
-    <div class="row ">
-      <div class="col-md-12">
-        <h4>New Arrivals<a href="{{ url('new-arrivals') }}" class="btn btn-warning float-end">View More</a></h4>
-        
-        <div class="underline"></div>
-      </div>
-      @if($newArrivalsProduct)
-      <div class="col-md-12">
-      <div class="owl-carousel owl-theme four-carousel">
-               @foreach($newArrivalsProduct as $productItem)
-
-              <div class="item">
-              <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-danger">New</label>
-
-                            @if($productItem->productImages->count()>0)
-                            <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}"> -->
-
-                              </a>
-                            
-                            @endif
-                           
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">  {{ $productItem->brand}}</p>
-                            <h5 class="product-name">
-                               <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                {{ $productItem->name}}
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">{{ $productItem->selling_price}} VND</span>
-                                <span class="original-price">{{ $productItem->original_price}} VND</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    @endforeach
-                    </div>
+            </div>
+            <div class="product-new-item-text">
+              <div class="product-new-item-text-brand"><p>NEW CLOTHES</p></div>
+                <div class="product-new-item-text-box">
+                  <div class="product-new-item-text-name"><p>{{ $productItem->name}}</p></div>
+                  <div class="product-new-item-text-link"><a href="{{ url('new-arrivals') }}">VIEW MORE NEW</a></div>
                 </div>
-              @else
-                <div class="col-md-12">
-                    <div class="p-2">
-                    <h4>No Product Avaliable for</h4>
-                    </div>
-                </div>
-              @endif
-      </div>
-    </div>
-  </div>
-</div>
-<div class="py-5 bg-white">
-  <div class="container">
-    <div class="row ">
-      <div class="col-md-12">
-        <h4>Featured products<a href="{{ url('featured-products') }}" class="btn btn-warning float-end">View More</a></h4>
-        
-        <div class="underline"></div>
-      </div>
-      @if($featuredProduct)
-      <div class="col-md-12">
-      <div class="owl-carousel owl-theme four-carousel">
-               @foreach($featuredProduct as $productItem)
-
-              <div class="item">
-              <div class="product-card">
-                        <div class="product-card-img">
-                            <label class="stock bg-danger">New</label>
-
-                            @if($productItem->productImages->count()>0)
-                            <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}"> -->
-
-                              </a>
-                            
-                            @endif
-                           
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">  {{ $productItem->brand}}</p>
-                            <h5 class="product-name">
-                               <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                {{ $productItem->name}}
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">{{ $productItem->selling_price}} VND</span>
-                                <span class="original-price">{{ $productItem->original_price}} VND</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    @endforeach
-                    </div>
-                </div>
-              @else
-                <div class="col-md-12">
-                    <div class="p-2">
-                    <h4>No Product Avaliable for</h4>
-                    </div>
-                </div>
-              @endif
-      </div>
-    </div>
-  </div>
-</div>
+            </div>
+          </div>
+          @endforeach
+          @endif
+        </div>
+      </section>
+      <section class="product-trending">
+        <div class="product-trending-header">
+          TRENDING
+        </div>
+        <div class="product-trending-container">
+          <div class="product-trending-img">
+            @if($trendingProducts)
+            @foreach($trendingProducts as $productItem)
+              <div class="img">
+              <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}">
+              </div>
+            @endforeach
+            @endif
+          </div>
+          <div class="product-trending-content">
+            <div class="product-trending-content-title">
+              <p>FALL WINTER 2023</p>
+            </div>
+            <div class="product-trending-content-des">
+              <p>The new campaign with Vittoria Ceretti, Aboubakar Konte, and Brando Erba.</p>
+            </div>
+            <div class="product-trending-content-link-box">
+              <a href="{{ url('featured-products') }}">
+                   <div class="trending-content-link"><p>VIEW MORE NEW</p></div>
+              </a>
+            </div>
+          </div>
+        </div>
+    </section>
 @endsection
 
 @section('script')

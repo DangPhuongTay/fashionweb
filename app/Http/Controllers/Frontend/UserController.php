@@ -44,7 +44,7 @@ class UserController extends Controller
         return view('frontend.users.change-password');
     }
 
-    public function changePassword(){
+    public function changePassword(Request $request){
         $request->validate([
             'current_password' => ['required','string','min:8'],
             'password' => ['required', 'string', 'min:8', 'confirmed']

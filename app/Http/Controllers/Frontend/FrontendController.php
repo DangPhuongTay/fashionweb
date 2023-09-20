@@ -41,6 +41,10 @@ class FrontendController extends Controller
         $featuredProduct = Product::where('featured','1')->latest()->get();
         return view('frontend.pages.featured-products',compact('featuredProduct'));
     }
+    public function trendingProduct(){
+        $trendingProduct = Product::where('trending','1')->latest()->get();
+        return view('frontend.pages.trending-products',compact('trendingProduct'));
+    }
 
     public function categories(){
         $categories = Category::where('status','0')->get();

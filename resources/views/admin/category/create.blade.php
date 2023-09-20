@@ -53,7 +53,7 @@
                                     @error('name') <small class="text-danger">{{$message}}</small> @enderror
                                 </div>
                                 <div class="col-md-12 mb-3">
-                                   <button type="submit" class="btn btn-primary float-end">Save</button>
+                                   <button type="submit" id="save-category" class="btn btn-primary float-end">Save</button>
                                 </div>
                             </div>
                         </form>

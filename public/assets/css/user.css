@@ -1,0 +1,196 @@
+.login-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+}
+.login{
+    display: flex;
+    position: relative;
+    border: 1px solid #eee;
+}
+.login-left-float{
+    float: right;
+    font-size: 25px;
+    font-style: italic;
+    padding-left: 180px;
+    
+}
+
+.login-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 420px;
+    height: 357px;
+    padding:50px;
+    background-color: white;
+    border-radius: 30px 0px 0px 30px;
+    
+}
+.login-right-title{
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 58px;
+}
+.login-right-input{
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 0.5px solid black;
+    outline: 0;
+    padding: 7px 0;
+    background: transparent;
+    
+}
+.login-right-content{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.login-right-content p{
+    font-size: 13px;
+}
+.login-right-link a{
+    color: #000;
+}
+.login-right-btn{
+    width: 100%;
+    background: #000;
+    padding: 10px 30px;
+    border-radius: 2px;
+    border: 2px;
+    color: #fff;
+    margin-top: 10px;
+}
+.login-right-checkbox{
+    display: flex;
+    align-items: center;
+    justify-content:center ;
+    gap: 5px;
+}
+/* register */
+.register-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    
+}
+.register{
+    display: flex;
+    position: relative;
+}
+.register-container form{
+    border: 1px solid #eee;
+}
+.register-title{
+    font-size: 80px;
+}
+.register-link{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 40px;
+    
+}
+.register-link a{
+    color: #000;
+}
+.register-link span{
+    margin: 0 20px;
+}
+
+.register-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 460px;
+    height: 400px;
+    padding:50px;
+    background-color: white;
+    border-radius: 30px 0px 0px 30px;
+    
+}
+.register-right-title{
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 58px;
+    text-transform: uppercase;
+}
+.register-right-link{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.register-right-center{
+    color: gray;
+    font-size: 20px;
+}
+.register-right-input{
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 0.5px solid black;
+    outline: 0;
+    padding: 7px 0;
+    background: transparent;
+    
+}
+.register-right-link button{
+    background-color: white;
+    border-radius: 5px;
+}
+.register-right-link-btn{
+    display: flex;
+    padding: 3px;
+    box-shadow: 2px 2px 5px #ffffff;
+}
+.register-right-logo{
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+.register-right-content{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+.register-right-content p{
+    font-size: 13px;
+}
+.register-right-link a{
+    color: #000;
+}
+.register-right-btn{
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: 2px;
+    margin-top: 20px;
+}
+.register-right-bottom{
+    width: 100%;
+    display: flex;
+    color: #000;
+}
+.register-right-bottom a{
+    color: #000;
+    font-size: 14px;
+}
+.register-right-footer{
+    margin-left: 3px;
+    color: #000000 !important;
+}

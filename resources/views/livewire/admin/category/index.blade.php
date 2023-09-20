@@ -31,7 +31,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3>Category
-                        <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end">Add Category</a>
+                        <a href="{{ url('admin/category/create') }}" class="btn btn-primary btn-sm float-end add-category">Add Category</a>
                     </h3>
                 </div>
                 <div class="card-body">
@@ -51,8 +51,8 @@
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->status=='1'?'Hidden':'Visible'}}</td>
                                     <td>
-                                        <a href="{{ url('admin/category/'.$category->id.'/edit')}}" class="btn btn-success">Edit</a>
-                                        <a href="#" wire:click="deleteCategory({{$category->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
+                                        <a  href="{{ url('admin/category/'.$category->id.'/edit')}}" class="btn btn-success">Edit</a>
+                                        <a  href="#" wire:click="deleteCategory({{$category->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

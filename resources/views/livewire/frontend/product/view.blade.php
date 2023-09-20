@@ -1,129 +1,111 @@
-<div>
-    <div class="py-3 py-md-5">
-        <div class="container">
-            @if (session()->has('message'))
+<section class="product-detail">
+        @if (session()->has('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             @endif
 
-            <div class="row">
-                <div class="col-md-5 mt-3">
-                    <div class="bg-white border" wire:ignore>
-                        @if($product->productImages)
-                        <!-- <img src="{{ asset($product->productImages[0]->image) }}" class="w-100" alt="Img"> -->
-                        <div class="exzoom" id="exzoom">
-                                        <!-- Images -->
-                                        <div class="exzoom_img_box">
-                                          <ul class='exzoom_img_ul'>
-                                            @foreach ($product->productImages as $itemImg)
-                                            <li><img src="{{ asset($itemImg->image)}}"/></li>
-                                            @endforeach
-                                          </ul>
-                                        </div>
-                                       
-                                        <div class="exzoom_nav"></div>
-                                        <p class="exzoom_btn">
-                                            <a href="javascript:void(0);" class="exzoom_prev_btn"> < </a>
-                                            <a href="javascript:void(0);" class="exzoom_next_btn"> > </a>
-                                        </p>
-                                      </div>
-                        
+            <div class="product-detail-container">
+                <div class="product-detail-image " wire:ignore>
+                @if($product->productImages)
+                    <div class="exzoom" id="exzoom" style="background-color: #fff;">
+                        <!-- Images -->
+                        <div class="exzoom_img_box ">
+                            <ul class='exzoom_img_ul'>
+                            @foreach ($product->productImages as $itemImg)
+                                <li><img id="image-product"  src="{{ asset($itemImg->image)}}"/></li>
+                            @endforeach
+                            </ul>
+                        </div>
+                        <div class="exzoom_nav"></div>
+                            <p class="exzoom_btn">
+                                <a href="javascript:void(0);" class="exzoom_prev_btn"> < </a>
+                                <a href="javascript:void(0);" class="exzoom_next_btn"> > </a>
+                            </p>
+                        </div> 
                         @else
-                        No Image Added
+                            No Image Added
                         @endif
                     </div>
-                </div>
-                <div class="col-md-7 mt-3">
-                    <div class="product-view">
-                        <h4 class="product-name">
-                           {{ $product->name }}
-                        </h4>
-                        <hr>
-                        <p class="product-path">
-                            Home / {{$product->category->name}} / {{ $product->name}}
-                        </p>
-                        <div>
-                            <span class="selling-price">{{ $product->selling_price}} VND</span>
-                            <span class="original-price">{{ $product->original_price}} VND</span>
-                        </div>
-                        <div>
-                            @if($product->productColors->count()>0)
+                <div class="product-detail-content">
+                 <div class="product-detail-info">
+                    <div class="product-detail-header">
+                        <div class="product-detail-header-link">HOME / {{$product->category->name}} / {{ $product->name}}</div>
+                        <div class="product-detail-header-back"><a href="{{url('/collections/'.$category->slug)}}">BACK</a></div>
+                    </div>
+                    <div class="product-detail-content-name">{{ $product->name }}</div>
+                    <div class="product-detail-content-brand"><p>{{$product->category->name}}</p></div>
+                    <div class="product-detail-content-small-des">{{ $product->small_description}}</div>
+                    <div class="product-detail-content-price">
+                        <div class="product-detail-content-price-original">{{ $product->original_price}}$</div>
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                        <div class="product-detail-content-price-seling">{{ $product->selling_price}}$</div>
+                    </div>
+                    <div class="product-detail-content-color">
+                    @if($product->productColors->count()>0)
                                 @if($product->productColors)
                                     @foreach($product->productColors as $colorItem)
                                         <!-- <input type="radio" name="colorSelection" value="{{ $colorItem->id }}">{{ $colorItem->color->name }} -->
-                                        <label class="btn-sm colorSelectionLable text-white" style="background-color: {{$colorItem->color->code}}"
+                                        <label id="color-product" class="btn-sm colorSelectionLable text-white" style="background-color: {{$colorItem->color->code}}"
                                             wire:click="colorSelected({{$colorItem->id}})">
                                             {{$colorItem->color->name}}
                                         </label>
                                     @endforeach
                                 @endif
                                 <div>
+                                <div></div>
                                 @if($this -> prodColorSelectedQuantity == 'outOfStock')
-                                    <label class="btn-sm label-stock py-1 mt-2 text-white bg-danger">Out of Stock</label>
+                                    <label class="btn-sm label-stock py-1 mt-2 text-dark bg-dark">OUT STOCK</label>
                                 @elseif($this -> prodColorSelectedQuantity > 0)
-                                    <label class="btn-sm label-stock py-1 mt-2 text-white bg-success">In Stock</label>
+                                    <label class="btn-sm label-stock py-1 mt-2 text-dark bg-light">IN STOCK</label>
                                 @endif
                                 </div>
                             @else
                                 @if($product->quantity)
-                                    <label class="btn-sm label-stock py-1 mt-2 text-white bg-success">In Stock</label>
+                                    <label class="btn-sm label-stock py-1 mt-2 text-dark bg-light">IN STOCK</label>
                                 @else
-                                    <label class="btn-sm label-stock py-1 mt-2 text-white bg-danger">Out Stock</label>
+                                    <label class="btn-sm label-stock py-1 mt-2 text-light bg-dark">OUT STOCK</label>
                                 @endif
                             @endif
+                    </div>
+                    <div class="product-detail-content-quanity">
+                        <div class="number-input">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown() " wire:click="decrementQuantity"></button>
+                            <input class="quantity" min="0" name="quantity" value="1" type="number" wire:model="quantityCount" value="{{$this->quantityCount}}" readonly>
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus" wire:click="incrementQuantity"></button>
                         </div>
-                        <div class="mt-2">
-                            <div class="input-group">
-                                <span class="btn btn1" wire:click="decrementQuantity"><i class="fa fa-minus"></i></span>
-                                <input type="text" wire:model="quantityCount" value="{{$this->quantityCount}}" readonly class="input-quantity" />
-                                <span class="btn btn1" wire:click="incrementQuantity"><i class="fa fa-plus"></i></span>
-                            </div>
                         </div>
-                        <div class="mt-2">
+                    </div>
 
-                            <button type="button" wire:click="addToCart({{$product->id}})" class="btn btn1">
-                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                            </button>
-
-
-                            <button type="button" wire:click= "addToWishList({{ $product->id}})" class="btn btn1">
-                                 <span wire:loading.remove wire:target="addToWishList">
+                    <div class="product-detail-btn">
+                        <div class="product-detail-btn-cart" type="button" wire:click="addToCart({{$product->id}})">
+                            ADD TO CART
+                        </div>
+                        <div class="product-detail-btn-wish" wire:click= "addToWishList({{ $product->id}})">
+                            
+                            <span wire:loading.remove wire:target="addToWishList">
                                     <i class="fa fa-heart"></i>
-                                    Add To Wishlist 
+                                    ADD TO WISHLIST
                                  </span>
                                  <span wire:loading wire:target="addToWishList">
-                                    Adding...
+                                    ADDING...
                                  </span>
-                            </button>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="mb-0">Small Description</h5>
-                            <p>
-                            {{ $product->small_description}}
-                            </p>
                         </div>
                     </div>
                 </div>
+
             </div>
-            <div class="row">
-                <div class="col-md-12 mt-3">
-                    <div class="card">
-                        <div class="card-header bg-white">
-                            <h4>Description</h4>
-                        </div>
-                        <div class="card-body">
-                            <p>
-                            {{ $product->description}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
+            <div class="product-detail-content-des">
+              <div class="product-detail-content-des-header-box">
+                <p class="product-detail-content-des-header">DESCRIPTION</p>
+              </div>
+                <span>
+                    {{ $product->description}}
+
+                </span>
             </div>
-        </div>
-    </div>
-</div>
-@push('scripts')
+        </section>
+    @push('scripts')
     <script>
         $(function(){
             

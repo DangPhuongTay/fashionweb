@@ -1,67 +1,42 @@
-<div>
-    <div class="py-3 py-md-4 checkout">
-        <div class="container">
-            <h4>Checkout</h4>
-            <hr>
-            @if($this->totalProductAmount != '0')
-                <div class="row">
-                <div class="col-md-12 mb-4">
-                    <div class="shadow bg-white p-3">
-                        <h4 class="text-primary">
-                            Item Total Amount :
-                            <span class="float-end">{{$this->totalProductAmount}} VND</span>
-                        </h4>
-                        <hr>
-                        <small>* Items will be delivered in 3 - 5 days.</small>
-                        <br/>
-                        <small>* Tax and other charges are included ?</small>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="shadow bg-white p-3">
-                        <h4 class="text-primary">
-                            Basic Information
-                        </h4>
-                        <hr>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label>Full Name</label>
-                                    <input type="text" wire:model.defer="fullname" id="fullname" class="form-control" placeholder="Enter Full Name" />
+<section class="section-checkout">
+            <h1 class="checkout-title">CHECK OUT</h1>
+        <div class="checkout">
+            <div class="checkout-left">
+                <h3 class="checkout-left-title">Basic Information</h3>
+                <input type="text" wire:model.defer="fullname" id="fullname" class="checkout-left-input first" placeholder="Enter Full Name" />
                                     @error('fullname') <small class="text-danger">{{$message}}</small>@enderror
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label>Phone Number</label>
-                                    <input type="number" wire:model.defer="phone" id="phone" class="form-control" placeholder="Enter Phone Number" />
-                                    @error('phone') <small class="text-danger">{{$message}}</small>@enderror
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label>Email Address</label>
-                                    <input type="email" wire:model.defer="email" id="email" class="form-control" placeholder="Enter Email Address" />
+                <input type="email" wire:model.defer="email" id="email" class="checkout-left-input" placeholder="Enter Email Address" />
                                     @error('email') <small class="text-danger">{{$message}}</small>@enderror
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label>Pin-code (Zip-code)</label>
-                                    <input type="number" wire:model.defer="pincode" id="pincode" class="form-control" placeholder="Enter Pin-code" />
+                <input type="number" wire:model.defer="phone" id="phone" class="checkout-left-input" placeholder="Enter Phone Number" />
+                                    @error('phone') <small class="text-danger">{{$message}}</small>@enderror
+                <input type="number" wire:model.defer="pincode" id="pincode" class="checkout-left-input" placeholder="Enter Pin-code" />
                                     @error('pincode') <small class="text-danger">{{$message}}</small>@enderror
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label>Full Address</label>
-                                    <textarea wire:model.defer="address" id="address" class="form-control" rows="2"></textarea>
+                <textarea wire:model.defer="address" id="address" class="checkout-left-input" rows="2"></textarea>
                                     @error('address') <small class="text-danger">{{$message}}</small>@enderror
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label>Select Payment Mode: </label>
+            </div>
+            <div class="checkout-right">
+                <h3 class="checkout-right-title">Item Total Amount</h3>
+
+                <div class="checkout-right-content">
+                   
+                </div>
+                <div class="checkout-right-content first">
+                    <p>Order Total</p>
+                    <p class="checkout-right-content-fw">$45.99</p>
+                </div>
+                <div class="checkout-right-payment">
+                    <h3>Payment Method</h3>
+                    <div class="col-md-12 mb-3">
                                     <div class="d-md-flex align-items-start">
-                                        <div class="nav col-md-3 flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <button wire:loading.attr="disabled" class="nav-link active fw-bold" id="cashOnDeliveryTab-tab" data-bs-toggle="pill" data-bs-target="#cashOnDeliveryTab" type="button" role="tab" aria-controls="cashOnDeliveryTab" aria-selected="true">Cash on Delivery</button>
-                                            <button wire:loading.attr="disabled" class="nav-link fw-bold" id="onlinePayment-tab" data-bs-toggle="pill" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">Online Payment</button>
+                                        <div class="nav col-md-5 flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <button wire:loading.attr="disabled" class="nav-link bg-dark text-light active fw-bold" id="cashOnDeliveryTab-tab" data-bs-toggle="pill" data-bs-target="#cashOnDeliveryTab" type="button" role="tab" aria-controls="cashOnDeliveryTab" aria-selected="true">Cash on Delivery</button>
+                                            <button wire:loading.attr="disabled" class="nav-link bg-dark text-light fw-bold" id="onlinePayment-tab" data-bs-toggle="pill" data-bs-target="#onlinePayment" type="button" role="tab" aria-controls="onlinePayment" aria-selected="false">Online Payment</button>
                                         </div>
-                                        <div class="tab-content col-md-9" id="v-pills-tabContent">
-                                            <div class="tab-pane active  fade" id="cashOnDeliveryTab" role="tabpanel" aria-labelledby="cashOnDeliveryTab-tab" tabindex="0">
-                                                <h6>Cash on Delivery Mode</h6>
+                                        <div class="tab-content col-md-7" id="v-pills-tabContent">
+                                            <div class="tab-pane active text-dark fade" id="cashOnDeliveryTab" role="tabpanel" aria-labelledby="cashOnDeliveryTab-tab" tabindex="0">
+                                                <h9 class>Cash on Delivery Mode</h9>
                                                 <hr/>
-                                                <button type="button" wire:loading.attr="disabled" wire:click="codOrder" class="btn btn-primary">
+                                                <button type="button" wire:loading.attr="disabled" wire:click="codOrder" class="btn btn-dark">
                                                     <span wire:loading.remove wire:target="codOrder">
                                                         Place Order (Cash on Delivery)
                                                     </span>
@@ -84,21 +59,12 @@
 
                                 </div>
                             </div>
-
-                    </div>
                 </div>
 
             </div>
-            @else
-                <div class="card card-body shadow text-center p-md-5">
-                    <h4>No items in cart to checkout</h4>
-                    <a href="{{ url('collection') }}" class="btn btn-warning">Shop now</a>
-                </div>
-            @endif
-
         </div>
-    </div>
-</div>
+        
+        </section>
 
 
 @push('scripts')

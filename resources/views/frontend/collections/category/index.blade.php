@@ -1,34 +1,33 @@
-@extends('layouts.app');
+@extends('layouts.app')
 
 @section('title','All Category')
 
 @section('content')
-<div class="py-3 py-md-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="mb-4">Our Categories</h4>
-                </div>
-                @forelse($categories as $key => $categoryItem)
-                <div class="col-6 col-md-3">
-                    <div class="category-card">
-                        <a href="{{url('/collections/'.$categoryItem->slug)}}">
-                            <div class="category-card-img">
-                                <img src="{{asset("$categoryItem->image")}}" class="w-100" alt="Laptop">
-                            </div>
-                            <div class="category-card-body">
-                            <h5>{{$categoryItem->name}}</h5>
-                            </div>
-                        </a>
+<section class="category">
+          <div class="category-header-box">
+            <span class="category-header">CATEGORY</span>
+           </div>
+          <div class="category-list">
+          @forelse($categories as $key => $categoryItem)
+            <div class="category-item">
+                <a id="link-category" href="{{url('/collections/'.$categoryItem->slug)}}">
+                    <div class="category-image">
+                    <img id="image-category" src="{{asset("$categoryItem->image")}}" class="w-100" alt="Laptop">
                     </div>
-                </div>
-                @empty
-                <div class="col-md-12">
+                    <div class="category-content">
+                        <div class="category-content-name">{{$categoryItem->name}}</div>
+                        <div class="category-content-link"> 
+                        <a href=""><span class="category-content-link-main">DISCOVER MORE</span></a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @empty
+            <div class="col-md-12">
                     <h5>No Category Avaliable</h5>
                 </div>
-                @endforelse
-            </div>
-        </div>
-    </div>
+            @endforelse
+          </div>
+        </section>
 
 @endsection

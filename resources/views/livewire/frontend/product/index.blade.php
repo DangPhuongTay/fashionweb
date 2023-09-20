@@ -1,82 +1,75 @@
-<div>
-    <div class="row">
-        <div class="col-md-3">
-            @if($category->brands)
-                <div class="card">
-                    <div class="card-header"><h4>Brands</h4></div>
-                    <div class="card-body">
-                    @foreach($category->brands as $brandItem)
-                        <label class="d-block">
-                            <input type="checkbox" wire:model="brandInputs" value="{{$brandItem->name}}"/>{{$brandItem->name}}
-                        </label>
-                    @endforeach
-                    </div>
-                </div>
-            @endif
-
-            <div class="card mt-3">
-                <div class="card-header"><h4>Price</h4></div>
-                <div class="card-body">
-                    <label class="d-block">
-                        <input type="radio" nam="priceSort" wire:model="priceInputs" value="high-to-low"/>High to Low
-                    </label>
-                    <label class="d-block">
+        <section class="product-all">
+          <div class="product-header">
+            <div class="product-header-name">PRODUCTS IS {{ $category->name}}</div>
+            <div class="product-header-tilte">{{ $category->description}}</div>
+          </div>
+          <div class="product-control">
+              <div class="product-control-link">
+                <a href="">CATEGORY / {{ $category->name}}</a>
+              </div>
+              <div class="product-control-filter">
+                <p>FILTER</p>
+              </div>
+              <div class="product-control-filter-detail">
+                  <div class="filter-price filter-list">
+                    <p>PRICE</p>
+                    <div class="product-control-filter-detail-list">
+                      <form action="#">
+                      <div class="product-detail-item">
                         <input type="radio" nam="priceSort" wire:model="priceInputs" value="low-to-high"/>Low to High
-                    </label>
+                      </div>
+                      <div class="product-detail-item">
+                        <input type="radio" nam="priceSort" wire:model="priceInputs" value="high-to-low"/>High to Low
+                      </div>
+                    </form>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-9">
+                  <div class="filter-brand filter-list">
+                    <p>BRAND</p>
+                    @if($category->brands)
+                    <div class="product-control-filter-detail-list">
+                      <form action="#">
+                      @foreach($category->brands as $brandItem)
 
-        <div class="row">
-            @forelse($products as $key => $productItem)
-                    <div class="col-md-4">
-                    <div class="product-card">
-                        <div class="product-card-img">
-                            @if($productItem->quantity > 0)
-                            <label class="stock bg-success">In Stock</label>
-                            @else
-                            <label class="stock bg-danger">Our Stock</label>
-                            @endif
-
-                            @if($productItem->productImages->count()>0)
-                            <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}">
-                            </a>
-                            
-                            @endif
-                           
-                        </div>
-                        <div class="product-card-body">
-                            <p class="product-brand">  {{ $productItem->brand}}</p>
-                            <h5 class="product-name">
-                               <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
-                                {{ $productItem->name}}
-                               </a>
-                            </h5>
-                            <div>
-                                <span class="selling-price">{{ $productItem->selling_price}} VND</span>
-                                <span class="original-price">{{ $productItem->original_price}} VND</span>
-                            </div>
-                            <!-- <div class="mt-2">
-                                <a href="" class="btn btn1">Add To Cart</a>
-                                <a href="" class="btn btn1"> <i class="fa fa-heart"></i> </a>
-                                <a href="" class="btn btn1"> View </a>
-                            </div> -->
-                        </div>
-                    </div>
+                      <div class="product-detail-item">
+                        <input type="checkbox" wire:model="brandInputs" value="{{$brandItem->name}}"/>{{$brandItem->name}}
+                      </div>
+                      @endforeach
+                    </form>
+                  </div>
+                  @endif
                 </div>
-                @empty
-                <div class="col-md-12">
-                    <div class="p-2">
-                    <h4>No Product Avaliable for {{ $category->name}}</h4>
-                    </div>
+              </div>
+          </div>
+          <div class="product-content">
+          @forelse($products as $key => $productItem)
+                <div class="product-item">
+                    <div class="product-img">
+                    @if($productItem->productImages->count()>0)
+                        <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
+                            <img src="{{ asset($productItem->productImages[0]->image)}}" alt="{{ $productItem->name}}">
+                        </a>
+                    @endif
                 </div>
-                @endforelse
-            </div>
-
-        </div>
-    </div>
-</div>
+                <div class="product-name">
+                    <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}" class="product-name-text">{{ $productItem->name}}</a>
+                    <p class="product-name-price">${{ $productItem->selling_price}}</p>
+                </div>
+                <div class="product-check">
+                    @if($productItem->quantity > 0)
+                        <p>IN STOCK</p>
+                    @else
+                        <p>OUT STOCK</p>
+                    @endif
+                </div>
+                </div>
+            @empty
+                <div class="col-md-12 no-item-product">
+                    <h6>No Product Avaliable for {{ $category->name}}</h6>
+                    <a href="{{url('/collections')}}">BACK</a>
+                </div>
+            @endforelse
+          </div>
+ </section>
 
 

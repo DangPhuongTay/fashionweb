@@ -53,9 +53,6 @@ class CategoryController extends Controller
     }
     public function update(CategoryFormRequest $request, $category){
         $validateData = $request->validated();
-
-       
-
         $category->name = $validateData['name'];
         $category->slug = Str::slug($validateData['slug']);
         $category->description = $validateData['description'];

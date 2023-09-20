@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
-@section('title','Search Product')
+@section('title','Trending Products')
 
 @section('content')
 <section class="product-all">
           <div class="product-control">
               <div class="product-control-link">
-                <H6>SEARCH RESULTS</H6>
+                <H6>TRENDING PRODUCTS</H6>
               </div>
               <div class="product-control-link">
                 <a href="{{ url('/collections') }}">VIEW MORE</a>
               </div>
           </div>
           <div class="product-content">
-          @forelse($searchProducts as $key => $productItem)
-                <div class="product-item" >
+          @forelse($trendingProduct as $key => $productItem)
+                <div class="product-item">
                     <div class="product-img">
                     @if($productItem->productImages->count()>0)
                         <a href="{{url('/collections/'.$productItem->category->slug.'/'.$productItem->slug)}}">
@@ -42,5 +42,4 @@
                 </div>
             @endforelse
           </div>
-</section> 
 @endsection

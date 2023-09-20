@@ -31,7 +31,7 @@ Route::controller(App\Http\Controllers\Frontend\FrontendController::class)->grou
 
     Route::get('/new-arrivals', 'newArrival');
     Route::get('/featured-products', 'featuredProduct');
-
+    Route::get('/trending-products', 'trendingProduct');
     Route::get('search','searchProducts');
 });
 
